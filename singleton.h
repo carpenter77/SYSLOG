@@ -1,5 +1,8 @@
-#include <memory>
 
+
+#ifndef SINGLETON_H
+#define SINGLETON_H
+#include <memory>
 namespace syslog{
     template <typename T>
     static T& GetInstance(){
@@ -12,3 +15,4 @@ namespace syslog{
         return vPtr;
     }  
 }
+#endif

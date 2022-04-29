@@ -1,13 +1,21 @@
-#include <iostream>
+#include<string>
 #include <memory>
+#include <iostream>
+#include <sstream>
 
-
+using namespace std;
+template<typename T>
+class Base{
+    private:
+    T val;
+    public:
+    Base(T val):val(val){}
+    void print(){
+        cout<<val<<endl;
+    }
+};
 int main(){
-    char* b=nullptr;             
-        int n= asprintf(&b, "%d, %d",10,12); 
-        if (n!=-1){                  
-            std::string str1=std::string(b,n); 
-            free(b); 
-        }
+    stringstream ss;
+    ss<<"test";
     return 0;
 }

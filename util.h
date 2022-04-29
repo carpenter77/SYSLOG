@@ -23,5 +23,13 @@ namespace syslog{
         static bool OpenForWrite(std::ofstream& ofs,const std::string& filename,std::ios_base::openmode mod);
 
     };
+
+    template<typename ...Args>
+    std::string string_format(const std::string& format,Args... args){
+        int n=snprintf(nullptr,0,format.c_str(),args...)+1;
+        char buf[n];
+        snprintf(buf,n,format.c_str(),args...);
+        return std::string(buf); 
+    }
 }
 #endif

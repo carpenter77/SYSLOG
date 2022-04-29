@@ -10,10 +10,12 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include "singleton.h"
 #include "util.h"
 
 #define MAKE_LOG_EVELT(level,message) \
-    std::make_shared<syslog::LogEvent>(level,__FILE__,message,__LINE__,0,syslog::getThreadId(),syslog::getFiberId(),::time(nullptr)) 
+         std::make_shared<syslog::LogEvent>(level,__FILE__,message,__LINE__,0,syslog::getThreadId(),\
+            syslog::getFiberId(),::time(nullptr))
 
 #define LOG_EVENT(logger,level,message) \
     logger->log(level,MAKE_LOG_EVELT(level,message));
@@ -40,10 +42,8 @@
 #define LOG_FMT_FATAL(logger,fmt,arg...) LOG_FMT_EVENT(logger,syslog::LogLevel::FATAL,fmt,arg)
 #define LOG_FMT_ERROR(logger,fmt,arg...) LOG_FMT_EVENT(logger,syslog::LogLevel::ERROR,fmt,arg)
 
+#define GET_ROOT_LOGGER() syslog::GetInstancePtr<syslog::LoggerManager>()->getRoot()
 
-
-
-//#define GET_ROOT_LOGGER() 
 namespace syslog{//区分不同的代码空间
     //每个日志对应一个Log Event
     class Logger;
@@ -83,10 +83,12 @@ namespace syslog{//区分不同的代码空间
         uint32_t getFiberId() const { return m_fiber_id; }
         time_t getTime() const { return m_time; }
         const std::string& getContent() const { return m_content; }
-
+        std::stringstream& getSS() { return m_ss;}
         const std::string getFile(){return m_file;}
         //格式化写入的日志
 
+        void format(const char* fmt, ...);
+        void format(const char* fmt, va_list al);
     private:
         //定义文件名
         const std::string m_file= nullptr;
@@ -98,6 +100,8 @@ namespace syslog{//区分不同的代码空间
         time_t   m_time;
         std::string m_content;
         //日志等级
+        /// 日志内容流
+        std::stringstream m_ss;
         LogLevel::Level m_level;
     };
 
@@ -106,6 +110,11 @@ namespace syslog{//区分不同的代码空间
         LogEventWrap(LogEvent::eventPtr ptr);
         ~LogEventWrap();
         LogEvent::eventPtr getEvent() const{return m_event;}
+
+        /**
+         * @brief 获取日志内容流
+         */
+        std::stringstream& getSS();
     private:
         LogEvent::eventPtr m_event;
     };

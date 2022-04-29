@@ -45,10 +45,14 @@ LogLevel::Level LogLevel::FromString(const std::string& str) {
         return LogLevel::UNKNOW;
 #undef XX
     }
+    
     LogEventWrap::LogEventWrap(LogEvent::eventPtr ptr):m_event(ptr) {}
     LogEventWrap::~LogEventWrap() {
-      
     }
+    std::stringstream& LogEventWrap::getSS() {
+        return m_event->getSS();
+    }
+
     LogAppender::LogAppender(LogLevel::Level level){
         m_level=level;
     }
@@ -231,7 +235,7 @@ thread_local static std::map<char, LogFormat::FormatItem::ptr> format_item_map{
 
     LogEvent::LogEvent( LogLevel::Level level
             ,const std::string fileName,std::string content, int32_t line, uint32_t elapse
-            ,uint32_t thread_id, uint32_t fiber_id, time_t time)
+            ,uint32_t thread_id, uint32_t fiber_id,  time_t time)
             :m_file(fileName)
             ,m_content(content)
             ,m_line(line)
@@ -240,6 +244,21 @@ thread_local static std::map<char, LogFormat::FormatItem::ptr> format_item_map{
             ,m_fiber_id(fiber_id)
             ,m_time(time)
             ,m_level(level) {
+    }
+    void LogEvent::format(const char* fmt, ...) {
+        va_list al;
+        va_start(al, fmt);
+        format(fmt, al);
+        va_end(al);
+    }
+
+    void LogEvent::format(const char* fmt, va_list al) {
+        char* buf = nullptr;
+        int len = vasprintf(&buf, fmt, al);
+        if(len != -1) {
+            m_ss << std::string(buf, len);
+            free(buf);
+        }
     }
 
     Logger::Logger(const std::string& name)
@@ -465,7 +484,7 @@ thread_local static std::map<char, LogFormat::FormatItem::ptr> format_item_map{
     
     LoggerManager::LoggerManager() {
         m_root.reset(new Logger);
-        LogAppender::ptr appender=std::make_shared<StdOutAppender>(LogLevel::DEBUG);
+        LogAppender::ptr appender=std::make_shared<StdOutAppender>();
         m_root->addAppender(std::move(appender));
 
         m_loggers[m_root->m_name] = m_root;

@@ -1,0 +1,5 @@
+/home/ubuntu/workspace/carpenter/syslog/build/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/workspace/carpenter/syslog/build/CMakeFiles/test_config.dir
+/home/ubuntu/workspace/carpenter/syslog/build/CMakeFiles/syslog.dir
+/home/ubuntu/workspace/carpenter/syslog/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/workspace/carpenter/syslog/build/CMakeFiles/test_log.dir

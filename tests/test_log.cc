@@ -1,8 +1,8 @@
 
 #include <string>
 #include <iostream>
-#include "../log.h"
-#include "../singleton.h"
+#include "log.h"
+#include "singleton.h"
 void test_log()
 {
     syslog::Logger::loggerPtr logger = std::make_shared<syslog::Logger>();
@@ -23,8 +23,7 @@ void test_log_level(){
 }
 int main(){
     test_log();
-    std::shared_ptr<std::string> p=syslog::GetInstancePtr<std::string>();
-    p->append("test");
+
     test_log_level();
     return 0;
 }

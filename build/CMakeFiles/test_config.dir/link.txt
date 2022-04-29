@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11   -g  -Wall    -rdynamic CMakeFiles/test_config.dir/tests/test_config.cc.o  -o ../bin/test_config  -L/home/ubuntu/workspace/carpenter/syslog/thirdlib/yaml-cpp/lib -Wl,-rpath,/home/ubuntu/workspace/carpenter/syslog/thirdlib/yaml-cpp/lib:/home/ubuntu/workspace/carpenter/syslog/lib ../lib/libsyslog.so -lyaml-cpp 
