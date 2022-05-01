@@ -264,7 +264,7 @@ thread_local static std::map<char, LogFormat::FormatItem::ptr> format_item_map{
     Logger::Logger(const std::string& name)
             :m_name(name)
             ,m_level(LogLevel::DEBUG) {
-        logFormat.reset(new LogFormat("[ %d %p ] %T [ %f:%l ] %T [ %t:%F ] %T [ %m ]%n"));
+        logFormat.reset(new LogFormat("[ %d %p ]%T[ %f:%l ]%T[ %t:%F ]  %m %n"));
     }
     void Logger::setFormatter(LogFormat::ptr val) {
         //MutexType::Lock lock(m_mutex);
@@ -489,7 +489,7 @@ thread_local static std::map<char, LogFormat::FormatItem::ptr> format_item_map{
 
         m_loggers[m_root->m_name] = m_root;
 
-        init();
+       // init();
     }
 
     Logger::loggerPtr LoggerManager::getLogger(const std::string& name) {

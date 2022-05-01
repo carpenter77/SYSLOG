@@ -1,3 +1,24 @@
-hello:
-    num_config: [1141studio]
-    name_config: [powered, by, 1141studio]
+# logs:
+#   -
+#     name: root
+#     level: info
+#     formatter: "%d%T%m%n"
+#     appender:
+#       -
+#         type: FileLogAppender
+#         file: log.txt
+#       - 
+#         type: StdoutLogAppender
+#   -
+#     name: system
+#     level: debug
+#     formatter: "%d%T%%n"
+#     appender:
+#       - 
+#         type: FileLogAppender
+#         path: log.txt
+#       - 
+#         type: StdoutLogAppender
+system:
+  port: 9901
+  value: 12.1

@@ -14,12 +14,13 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11   -g  -Wall  ")
 
 include_directories(${PROJECT_SOURCE_DIR})
-include_directories(${PROJECT_SOURCE_DIR}/thirdlib/yaml-cpp/include/)
-link_directories(${PROJECT_SOURCE_DIR}/thirdlib/yaml-cpp/lib)
+include_directories(/usr/local/include/yaml-cpp/include/)
+link_directories(/usr/local/lib)
 
 #查找.下的所有cpp文件，然后将结果存进指定变量名(这里是DIR_SRCS)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR} DIR_SRCS)
 add_library(syslog SHARED ${DIR_SRCS}) 
+target_link_libraries(syslog yaml-cpp)
 set_target_properties(syslog PROPERTIES LINKER_LANGUAGE CXX)
 # add_subdirectory(tests)
 

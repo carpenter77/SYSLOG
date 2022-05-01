@@ -1,21 +1,17 @@
-#include<string>
-#include <memory>
-#include <iostream>
-#include <sstream>
 
+#include "test.h"
+#include<iostream>
 using namespace std;
-template<typename T>
-class Base{
-    private:
-    T val;
-    public:
-    Base(T val):val(val){}
-    void print(){
-        cout<<val<<endl;
-    }
-};
+//template<typename T>
+//map<string,T> A<T>::datas;
 int main(){
-    stringstream ss;
-    ss<<"test";
+    {
+      A<int> a;
+      a.put("123",12);
+      cout<<a.getVal("123")<<endl;
+    }
+    A<int> b;
+    
+    cout<<b.getVal("123")<<endl;
     return 0;
 }

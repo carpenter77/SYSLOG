@@ -6,6 +6,8 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <sstream>
+#include <cxxabi.h>
 namespace syslog{
     long getThreadId();
     uint32_t getFiberId();
@@ -30,6 +32,19 @@ namespace syslog{
         char buf[n];
         snprintf(buf,n,format.c_str(),args...);
         return std::string(buf); 
+    }
+    
+    template<typename T>
+    std::string convToString(T val){
+        std::stringstream ss;
+        ss<<val;
+        return ss.str();
+    }
+
+    template<class T>
+    const char* TypeToName() {
+        static const char* s_name = abi::__cxa_demangle(typeid(T).name(), nullptr, nullptr, nullptr);
+        return s_name;
     }
 }
 #endif

@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC  -std=c++11   -g  -Wall    -shared -Wl,-soname,libsyslog.so -o ../lib/libsyslog.so CMakeFiles/syslog.dir/log.cc.o CMakeFiles/syslog.dir/main.cc.o CMakeFiles/syslog.dir/util.cc.o  -L/home/ubuntu/workspace/carpenter/syslog/thirdlib/yaml-cpp/lib 
