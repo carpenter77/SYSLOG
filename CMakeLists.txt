@@ -14,8 +14,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11   -g  -Wall  ")
 
 include_directories(${PROJECT_SOURCE_DIR})
-include_directories(/usr/local/include/yaml-cpp/include/)
-link_directories(/usr/local/lib)
+include_directories(${workspaceFolder}/include/yaml-cpp/include/)
+link_directories(${workspaceFolder}/lib)
 
 #查找.下的所有cpp文件，然后将结果存进指定变量名(这里是DIR_SRCS)
 AUX_SOURCE_DIRECTORY(${PROJECT_SOURCE_DIR} DIR_SRCS)

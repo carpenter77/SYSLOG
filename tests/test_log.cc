@@ -21,9 +21,14 @@ void test_log_level(){
     LOG_FMT_INFO(logger,"test info fmt : %s,%d ","info",1);
     LOG_FMT_ERROR(logger,"test error fmt : %s,%d ","error",-1);
 }
-int main(){
+int main(int argc,char** agrv){
     test_log();
-
     test_log_level();
+    syslog::Logger::loggerPtr logger(new syslog::Logger);
+    logger->addAppender(syslog::LogAppender::ptr(new syslog::FileOutAppender("./log.txt")));
+    std::cout<<"hello syslog"<<std::endl;
+    LOG_INFO(logger,"test macro info");
+    LOG_ERROR(logger,"test macro error");
+    LOG_FMT_ERROR(logger,"test macro fmt error %s","aa");
     return 0;
 }

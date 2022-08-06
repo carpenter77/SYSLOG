@@ -44,6 +44,8 @@
 
 #define GET_ROOT_LOGGER() syslog::GetInstancePtr<syslog::LoggerManager>()->getRoot()
 
+#define GET_LOG_MANAGER() syslog::GetInstancePtr<>
+
 namespace syslog{//区分不同的代码空间
     //每个日志对应一个Log Event
     class Logger;

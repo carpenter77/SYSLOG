@@ -1,17 +1,14 @@
 
-#include "test.h"
-#include<iostream>
+#include <iostream>
+#include <string>
+#include <boost/lexical_cast.hpp>
+
 using namespace std;
-//template<typename T>
-//map<string,T> A<T>::datas;
+
 int main(){
-    {
-      A<int> a;
-      a.put("123",12);
-      cout<<a.getVal("123")<<endl;
-    }
-    A<int> b;
-    
-    cout<<b.getVal("123")<<endl;
-    return 0;
+  std::string val("12");
+  int v=boost::lexical_cast<int>(val);
+  cout<<v<<endl;
+ return 0;
+
 }
